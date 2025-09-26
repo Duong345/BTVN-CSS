@@ -1,0 +1,19 @@
+- cú pháp sử dụng attribute selector:
+selector[attribute] {
+....
+}
+selector[attribute="value"] { 
+....
+}
+- ví dụ:
+input[type="text"] {
+  border: 1px solid blue;
+}
+- các toán tử hỗ trợ:
+^= bắt đầu với
+$= kết thúc với
+*= chứa
+~= chứa từ riêng biệt
+|= khớp tiền tố
+
+
