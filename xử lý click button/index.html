@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button id="btn">Toggle</button>
+    <img id="myImg" src="3b47c318-8fbe-46bb-90da-22f538d9b59b.png" />
+    <script>
+      const btn = document.getElementById("btn");
+      const img = document.getElementById("myImg");
+      btn.addEventListener("click", function () {
+        img.classList.toggle("hidden");
+      });
+    </script>
+  </body>
+</html>
