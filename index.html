@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <section class="container">
+      <header class="header">
+        <nav class="navbar">
+          <ul class="navbar__menu">
+            <li class="navbar__item">Home</li>
+            <li class="navbar__item navbar__item--dropdown">
+              Category
+              <ul class="dropdown">
+                <li class="dropdown__item">All Books</li>
+                <li class="dropdown__item dropdown__item--submenu">
+                  Fiction
+                  <ul class="submenu">
+                    <li class="submenu__item">LITERATURE</li>
+                    <li class="submenu__item">FANTASY</li>
+                    <li class="submenu__item">CRIME,THRILLERS & HORROR</li>
+                    <li class="submenu__item">CLASSICS</li>
+                    <li class="submenu__item">SCIENCE FICTION</li>
+                    <li class="submenu__item">WORLD LITERATURE</li>
+                    <li class="submenu__item">ROMANCE</li>
+                    <li class="submenu__item">CONTEMPORARY</li>
+                    <li class="submenu__item">ANTHOLOGY & SHORT STORIES</li>
+                    <li class="submenu__item">YOUNG ADULTS</li>
+                    <li class="submenu__item">CHILDREN</li>
+                    <li class="submenu__item">NOBEL PRIZE WINNERS</li>
+                    <li class="submenu__item">
+                      BOOKER PRIZE WINNERS & NOMINEES
+                    </li>
+                  </ul>
+                </li>
+                <li class="dropdown__item">Nonfiction</li>
+                <li class="dropdown__item">Poetry</li>
+                <li class="dropdown__item">Comic & Graphic Novel</li>
+                <li class="dropdown__item">Art, Photography & Design</li>
+                <li class="dropdown__item">Language, Reference & Textbook</li>
+                <li class="dropdown__item">Nobel Prize Winners</li>
+                <li class="dropdown__item">Booker Prize Winners & Nominees</li>
+                <li class="dropdown__item">Books on VietNam</li>
+                <li class="dropdown__item">Xem thêm</li>
+              </ul>
+            </li>
+            <li class="navbar__item">Books</li>
+          </ul>
+          <button class="user-avatar">
+            <ul class="navbar__user-avatar">
+              <li class="navbar__user-avatar--item">
+                <h4>Dương</h4>
+                <span>20225821</span>
+                <h5>VIP 0</h5>
+              </li>
+              <li class="navbar__user-avatar--item">Change password</li>
+              <li class="navbar__user-avatar--item">Sign Out</li>
+            </ul>
+          </button>
+        </nav>
+      </header>
+
+      <main class="main-content">
+        <section class="book-section">
+          <div class="book-section__header">
+            <h2 class="book-section__title">NEW ARRIVALS</h2>
+            <div class="book-section__navigation">
+              <button class="nav-button nav-button--prev">‹</button>
+              <button class="nav-button nav-button--next">›</button>
+            </div>
+          </div>
+
+          <div class="book-grid">
+            <article class="book-card">
+              <div class="book-card__image-wrapper">
+                <img
+                  src="./assets/book-new-1.jpg"
+                  alt="I Want to Die but I Want to Eat Tteokbokki"
+                  class="book-card__image"
+                />
+              </div>
+              <h3 class="book-card__title">
+                I Want to Die but I Want to Eat Tteokbokki
+              </h3>
+              <p class="book-card__price">260.000 VNĐ</p>
+              <span class="book-card__status book-card__status--in-stock"
+                >In stock</span
+              >
+            </article>
+
+            <article class="book-card">
+              <div class="book-card__image-wrapper">
+                <img
+                  src="./assets/book-new-2.jpg"
+                  alt="Recognizing the Stranger"
+                  class="book-card__image"
+                />
+              </div>
+              <h3 class="book-card__title">
+                Recognizing the Stranger: On Palestine and Narrative
+              </h3>
+              <p class="book-card__price">230.000 VNĐ</p>
+              <span class="book-card__status book-card__status--out"
+                >Out of stock</span
+              >
+            </article>
+
+            <article class="book-card">
+              <div class="book-card__image-wrapper">
+                <img
+                  src="./assets/book-new-3.jpg"
+                  alt="Vulture Capitalism"
+                  class="book-card__image"
+                />
+              </div>
+              <h3 class="book-card__title">
+                Vulture Capitalism: How to Survive in an Age of Corporate Greed
+              </h3>
+              <p class="book-card__price">350.000 VNĐ</p>
+              <span class="book-card__status book-card__status--out"
+                >Out of stock</span
+              >
+            </article>
+
+            <article class="book-card">
+              <div class="book-card__image-wrapper">
+                <img
+                  src="./assets/book-new-4.jpg"
+                  alt="How Bad Are Bananas?"
+                  class="book-card__image"
+                />
+              </div>
+              <h3 class="book-card__title">
+                How Bad Are Bananas?: The Carbon Footprint of Everything
+              </h3>
+              <p class="book-card__price">330.000 VNĐ</p>
+              <span class="book-card__status book-card__status--out"
+                >Out of stock</span
+              >
+            </article>
+
+            <article class="book-card">
+              <div class="book-card__image-wrapper">
+                <img
+                  src="./assets/book-new-5.jpg"
+                  alt="Huế 1968"
+                  class="book-card__image"
+                />
+              </div>
+              <h3 class="book-card__title">
+                Huế 1968: A Turning Point of the American War in Vietnam
+              </h3>
+              <p class="book-card__price">430.000 VNĐ</p>
+              <span class="book-card__status book-card__status--in-stock"
+                >In stock</span
+              >
+            </article>
+          </div>
+        </section>
+
+        <section class="book-section">
+          <div class="book-section__header">
+            <h2 class="book-section__title">VERSO BOOKS</h2>
+            <div class="book-section__navigation">
+              <button class="nav-button nav-button--prev">‹</button>
+              <button class="nav-button nav-button--next">›</button>
+            </div>
+          </div>
+
+          <div class="book-grid">
+            <article class="book-card">
+              <div class="book-card__image-wrapper">
+                <img
+                  src="./assets/book-verso-1.jpg"
+                  alt="Violent Borders"
+                  class="book-card__image"
+                />
+              </div>
+              <h3 class="book-card__title">
+                Violent Borders: Refugees and the Right to Move
+              </h3>
+              <p class="book-card__price">240.000 VNĐ</p>
+              <span class="book-card__status book-card__status--in-stock"
+                >In stock</span
+              >
+            </article>
+
+            <article class="book-card">
+              <div class="book-card__image-wrapper">
+                <img
+                  src="./assets/book-verso-2.jpg"
+                  alt="Politicide"
+                  class="book-card__image"
+                />
+              </div>
+              <h3 class="book-card__title">
+                Politicide: Ariel Sharon's War Against the Palestinians
+              </h3>
+              <p class="book-card__price">270.000 VNĐ</p>
+              <span class="book-card__status book-card__status--in-stock"
+                >In stock</span
+              >
+            </article>
+
+            <article class="book-card">
+              <div class="book-card__image-wrapper">
+                <img
+                  src="./assets/book-verso-3.jpg"
+                  alt="Urban Warfare"
+                  class="book-card__image"
+                />
+              </div>
+              <h3 class="book-card__title">
+                Urban Warfare: Housing under the Empire of Finance
+              </h3>
+              <p class="book-card__price">370.000 VNĐ</p>
+              <span class="book-card__status book-card__status--in-stock"
+                >In stock</span
+              >
+            </article>
+
+            <article class="book-card">
+              <div class="book-card__image-wrapper">
+                <img
+                  src="./assets/book-verso-4.jpg"
+                  alt="Health Communism"
+                  class="book-card__image"
+                />
+              </div>
+              <h3 class="book-card__title">
+                Health Communism: A Surplus Manifesto
+              </h3>
+              <p class="book-card__price">330.000 VNĐ</p>
+              <span class="book-card__status book-card__status--out"
+                >Out of stock</span
+              >
+            </article>
+
+            <article class="book-card">
+              <div class="book-card__image-wrapper">
+                <img
+                  src="./assets/book-verso-5.jpg"
+                  alt="Paris in Turmoil"
+                  class="book-card__image"
+                />
+              </div>
+              <h3 class="book-card__title">
+                Paris in Turmoil: A City between Past and Future
+              </h3>
+              <p class="book-card__price">360.000 VNĐ</p>
+              <span class="book-card__status book-card__status--out"
+                >Out of stock</span
+              >
+            </article>
+          </div>
+        </section>
+      </main>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const avatarBtn = document.querySelector(".user-avatar");
+        const menu = document.querySelector(".navbar__user-avatar");
+
+        avatarBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          menu.classList.toggle("active");
+        });
+
+        document.addEventListener("click", (e) => {
+          if (!avatarBtn.contains(e.target)) {
+            menu.classList.remove("active");
+          }
+        });
+        document.querySelectorAll(".book-section").forEach((section) => {
+          const grid = section.querySelector(".book-grid");
+          const prevBtn = section.querySelector(".nav-button--prev");
+          const nextBtn = section.querySelector(".nav-button--next");
+
+          if (prevBtn && nextBtn && grid) {
+            prevBtn.addEventListener("click", () => {
+              grid.scrollBy({ left: -250, behavior: "smooth" });
+            });
+            nextBtn.addEventListener("click", () => {
+              grid.scrollBy({ left: 250, behavior: "smooth" });
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
