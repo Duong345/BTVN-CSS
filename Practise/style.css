@@ -1,0 +1,24 @@
+.grandparent {
+  border: 2px solid black;
+  padding: 10px;
+  margin: 10px;
+  height: 400px;
+  width: 400px;
+}
+.parent {
+  border: 2px solid red;
+  padding: 10px;
+  margin: 10px;
+  height: 300px;
+  width: 300px;
+}
+.child--girl {
+  border: 2px solid blue;
+  padding: 10px;
+  margin: 10px;
+  height: 100px;
+  width: 100px;
+}
+.child--boy {
+  margin-top: 50px;
+}
