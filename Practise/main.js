@@ -1,3 +1,5 @@
 var girl = document.querySelector(".child--girl");
-var boy = girl.nextElementSibling;
-var input = boy.querySelector("input");
+var p = girl.nextElementSibling;
+var input = p.nextElementSibling;
+console.log(p);
+console.log(input);
