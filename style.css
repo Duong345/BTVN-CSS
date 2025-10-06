@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -9,6 +10,7 @@ body {
   background-color: #f5f5f5;
   padding: 20px;
 }
+
 .container {
   position: relative;
 }
@@ -33,8 +35,8 @@ a {
 }
 
 .navbar {
-  background: #90ee90;
-  border: 3px solid black;
+  background: green;
+  border: 3px solid #333;
   border-radius: 30px;
   padding: 8px 25px;
   display: flex;
@@ -45,36 +47,30 @@ a {
   left: 0;
   right: 0;
 }
-
 .navbar__menu {
   display: flex;
 }
-
 .navbar__item {
   position: relative;
   padding: 12px 45px;
-  color: #ff4444;
+  color: #fff;
   font-weight: bold;
   font-size: 18px;
-  border-right: 4px solid #ff4444;
+  border-right: 4px solid red;
   transition: all 0.3s ease;
   cursor: pointer;
 }
-
 .navbar__item:last-child {
   border-right: none;
 }
-
 .navbar__item--dropdown::after {
   content: "▼";
   margin-left: 8px;
   font-size: 12px;
 }
-
 .navbar__item--dropdown:hover::after {
   content: "▲";
 }
-
 .navbar__item--dropdown::before {
   content: "";
   position: absolute;
@@ -83,39 +79,34 @@ a {
   right: 0;
   height: 15px;
 }
+.navbar__item--dropdown:hover .dropdown {
+  display: block;
+}
 
 .dropdown {
   position: absolute;
   top: calc(100% + 15px);
   left: 0;
-  background-color: white;
+  background-color: #fff;
   min-width: 330px;
   display: none;
-  border: #333 1px solid;
+  border: 1px solid #333;
 }
-
-.navbar__item--dropdown:hover .dropdown {
-  display: block;
-}
-
 .dropdown__item {
   padding: 14px 25px;
   color: #333;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #333;
   cursor: pointer;
   position: relative;
   font-size: 15px;
 }
-
 .dropdown__item:last-child {
   border-bottom: none;
 }
-
 .dropdown__item:hover {
-  background-color: #4a7c59;
-  color: white;
+  background-color: green;
+  color: #fff;
 }
-
 .dropdown__item--submenu::after {
   content: "❯";
   position: absolute;
@@ -124,23 +115,21 @@ a {
   transform: translateY(-50%);
   font-size: 12px;
 }
-
-.submenu {
-  position: absolute;
-  left: 100%;
-  top: 0;
-  background-color: white;
-  border: 1px solid black;
-  min-width: 1000px;
-  display: none;
-  padding: 20px;
-}
-
 .dropdown__item--submenu:hover .submenu {
   display: flex;
   flex-wrap: wrap;
 }
 
+.submenu {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: #fff;
+  border: 1px solid #333;
+  min-width: 1000px;
+  display: none;
+  padding: 20px;
+}
 .submenu__item {
   flex: 0 0 25%;
   padding: 12px 25px;
@@ -149,17 +138,16 @@ a {
   font-size: 14px;
   box-sizing: border-box;
 }
-
 .submenu__item:hover {
   background-color: green;
-  color: white;
+  color: #fff;
 }
 
 .user-avatar {
   width: 65px;
   height: 65px;
   border-radius: 50%;
-  border: 1px solid #ff4444;
+  border: 1px solid red;
   background: #87ceeb;
   cursor: pointer;
   position: relative;
@@ -175,26 +163,24 @@ a {
 }
 .navbar__user-avatar.active {
   display: block;
-  background: white;
-  border: 1px solid black;
+  background: #fff;
+  border: 1px solid #333;
   border-radius: 10px;
   padding: 10px;
 }
 .navbar__user-avatar--item {
   padding: 8px 12px;
   cursor: pointer;
-  border-bottom: 1px solid black;
-  left: 0px;
+  border-bottom: 1px solid #333;
   text-align: left;
 }
 .navbar__user-avatar--item:last-child {
   border-bottom: none;
   color: red;
 }
-
 .navbar__user-avatar--item:hover {
-  background: black;
-  color: white;
+  background: #333;
+  color: #fff;
 }
 
 .main-content {
@@ -204,30 +190,27 @@ a {
 }
 
 .book-section {
-  background-color: white;
+  background-color: #fff;
   border: 2px solid #ddd;
 }
-
 .book-section__header {
-  background-color: #4a7c59;
+  background-color: green;
   padding: 12px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .book-section__title {
-  color: white;
+  color: #fff;
 }
-
 .book-section__navigation {
   display: flex;
   gap: 10px;
 }
 
 .nav-button {
-  border: 2px solid white;
-  color: white;
+  border: 2px solid #fff;
+  color: #fff;
   width: 32px;
   height: 32px;
   border-radius: 4px;
@@ -237,9 +220,8 @@ a {
   align-items: center;
   justify-content: center;
 }
-
 .nav-button:hover {
-  background-color: white;
+  background-color: #fff;
   color: green;
 }
 
@@ -255,7 +237,6 @@ a {
   flex-direction: column;
   cursor: pointer;
 }
-
 .book-card__image-wrapper {
   width: 100%;
   aspect-ratio: 2/3;
@@ -263,13 +244,11 @@ a {
   border: 1px solid #ddd;
   margin-bottom: 12px;
 }
-
 .book-card__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 .book-card__title {
   font-size: 14px;
   font-weight: normal;
@@ -278,26 +257,23 @@ a {
   line-height: 1.4;
   min-height: 40px;
 }
-
 .book-card__price {
   font-size: 15px;
   font-weight: bold;
   color: #333;
 }
-
 .book-card__status {
   font-size: 13px;
   padding: 4px 0;
   display: inline-block;
 }
-
 .book-card__status--in-stock {
-  color: #ff8c00;
+  color: orange;
+}
+.book-card__status--out {
+  color: red;
 }
 
-.book-card__status--out {
-  color: #dc143c;
-}
 @media (min-width: 901px) {
   .book-section__navigation {
     display: none;
@@ -313,3 +289,5 @@ a {
     flex: 0 0 calc((100% - 50px) / 3);
   }
 }
+
+/*# sourceMappingURL=style.css.map */
