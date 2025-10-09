@@ -57,7 +57,6 @@ a {
   font-weight: bold;
   font-size: 18px;
   border-right: 4px solid red;
-  transition: all 0.3s ease;
   cursor: pointer;
 }
 .navbar__item:last-child {
