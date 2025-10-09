@@ -1,24 +1,32 @@
-.grandparent {
-  border: 2px solid black;
-  padding: 10px;
-  margin: 10px;
-  height: 400px;
-  width: 400px;
+body {
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
-.parent {
-  border: 2px solid red;
-  padding: 10px;
-  margin: 10px;
-  height: 300px;
-  width: 300px;
+
+.button-group {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  background: #fff;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-.child--girl {
-  border: 2px solid blue;
-  padding: 10px;
-  margin: 10px;
-  height: 100px;
-  width: 100px;
+
+button {
+  padding: 10px 14px;
+  border: 1px solid #333;
+  background: #eaeaea;
+  cursor: pointer;
+  border-radius: 6px;
 }
-.child--boy {
-  margin-top: 50px;
+
+input[name="phone-number"] {
+  padding: 10px;
+  border: 1px solid #999;
+  border-radius: 6px;
 }
