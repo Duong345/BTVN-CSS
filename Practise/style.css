@@ -1,0 +1,32 @@
+body {
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.button-group {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  background: #fff;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button {
+  padding: 10px 14px;
+  border: 1px solid #333;
+  background: #eaeaea;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+input[name="phone-number"] {
+  padding: 10px;
+  border: 1px solid #999;
+  border-radius: 6px;
+}
