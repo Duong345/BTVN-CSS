@@ -1,35 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const avatarBtn = document.querySelector(".user-avatar");
-  const menu = document.querySelector(".navbar__user-avatar");
+  const inputList = document.querySelector(".input-list");
+  const addBtn = document.querySelector(".add-btn");
+  const logBtn = document.querySelector(".log-btn");
+  addBtn.addEventListener("click", () => {
+    const currentCount = inputList.querySelectorAll("input").length;
+    const newIndex = currentCount + 1;
 
-  if (avatarBtn && menu) {
-    avatarBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      menu.classList.add("active");
+    const newInput = document.createElement("input");
+    newInput.type = "text";
+    newInput.name = "phone-number";
+    newInput.placeholder = `${newIndex - 1} `;
+
+    inputList.appendChild(newInput);
+  });
+
+  logBtn.addEventListener("click", () => {
+    const inputs = inputList.querySelectorAll("input[name='phone-number']");
+    console.clear();
+    console.log("All typed phone numbers:");
+    inputs.forEach((input, index) => {
+      console.log(`{ ${index + 1} }; { ${input.value} }`);
     });
-
-    menu.addEventListener("click", (e) => {
-      e.stopPropagation();
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!avatarBtn.contains(e.target) && !menu.contains(e.target)) {
-        menu.classList.remove("active");
-      }
-    });
-  }
-  document.querySelectorAll(".book-section").forEach((section) => {
-    const grid = section.querySelector(".book-grid");
-    const prevBtn = section.querySelector(".nav-button--prev");
-    const nextBtn = section.querySelector(".nav-button--next");
-
-    if (prevBtn && nextBtn && grid) {
-      prevBtn.addEventListener("click", () => {
-        grid.scrollBy({ left: -250, behavior: "smooth" });
-      });
-      nextBtn.addEventListener("click", () => {
-        grid.scrollBy({ left: 250, behavior: "smooth" });
-      });
-    }
   });
 });
