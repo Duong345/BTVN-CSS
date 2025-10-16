@@ -1,0 +1,65 @@
+@use "./variables" as *;
+@use "sass:map";
+@use "sass:meta";
+
+@mixin respond-up($name) {
+  $breakpoints: $grid-breakpoints !default;
+  $min: map.get($breakpoints, $name);
+  @if $min != null and $min != 0 {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin respond-down($name) {
+  $breakpoints: $grid-breakpoints !default;
+  $max: map.get($breakpoints, $name);
+  @if $max != null {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin respond-between($lower, $upper) {
+  $breakpoints: $grid-breakpoints !default;
+  $min: map.get($breakpoints, $lower);
+  $max: map.get($breakpoints, $upper);
+  @media (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+@mixin sp-only {
+  @media (max-width: $sp-max) {
+    @content;
+  }
+}
+@mixin tb-only {
+  @media (min-width: $tb-min) and (max-width: $tb-max) {
+    @content;
+  }
+}
+@mixin dt-up {
+  @media (min-width: $dt-min) {
+    @content;
+  }
+}
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin clickable {
+  cursor: pointer;
+  user-select: none;
+}
+
+@mixin rounded($radius: 10px) {
+  border-radius: $radius;
+}
