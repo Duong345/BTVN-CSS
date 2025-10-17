@@ -43,7 +43,7 @@ a {
 .navbar {
   background: green;
   border: 3px solid #333;
-  border-radius: 30px;
+  border-radius: 10px;
   padding: 8px 25px;
   display: flex;
   align-items: center;
