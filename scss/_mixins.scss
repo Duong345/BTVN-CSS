@@ -2,21 +2,52 @@
 @use "sass:map";
 @use "sass:meta";
 
-@mixin sp-only {
-  @media (max-width: $sp-max) {
-    @content;
+$breakpoints: (
+  "sp-max": $sp-max,
+  "tb-min": $tb-min,
+  "tb-max": $tb-max,
+  "dt-min": $dt-min,
+);
+
+@function get-bp($key) {
+  @if map.has-key($breakpoints, $key) {
+    @return map.get($breakpoints, $key);
+  } @else {
+    @error " không tìm thấy";
   }
 }
-@mixin tb-only {
-  @media (min-width: $tb-min) and (max-width: $tb-max) {
-    @content;
+
+@mixin mq($breakpoint, $rule: min, $breakpoint2: null) {
+  @if $rule == min {
+    @media (min-width: get-bp($breakpoint)) {
+      @content;
+    }
+  } @else if $rule == max {
+    @media (max-width: get-bp($breakpoint)) {
+      @content;
+    }
+  } @else if $rule == between {
+    @if $breakpoint2 == null {
+      @error " tham số breakpoint2 cần có giá trị";
+    }
+    @media (min-width: get-bp($breakpoint)) and (max-width: get-bp($breakpoint2)) {
+      @content;
+    }
+  } @else {
+    @error " không có rule như vậy";
   }
 }
-@mixin dt-up {
-  @media (min-width: $dt-min) {
-    @content;
+@mixin mq-multi($queries...) {
+  @each $query in $queries {
+    $bp: nth($query, 1);
+    $rule: if(length($query) > 1, nth($query, 2), min);
+    $bp2: if(length($query) > 2, nth($query, 3), null);
+    @include mq($bp, $rule, $bp2) {
+      @content;
+    }
   }
 }
+
 @mixin flex-center {
   display: flex;
   align-items: center;

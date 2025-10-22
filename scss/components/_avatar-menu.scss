@@ -4,8 +4,8 @@
   width: 65px;
   height: 65px;
   border-radius: 50%;
-  border: 1px solid $color-red;
-  background: $color-sky;
+  border: 1px solid $red;
+  background: $sky;
   cursor: pointer;
   position: relative;
 }
@@ -20,8 +20,8 @@
 
   &.active {
     display: block;
-    background: $color-white;
-    border: 1px solid $color-black;
+    background: $white;
+    border: 1px solid $black;
     border-radius: 10px;
     padding: 10px;
   }
@@ -29,16 +29,16 @@
   &--item {
     padding: 8px 12px;
     cursor: pointer;
-    border-bottom: 1px solid $color-black;
+    border-bottom: 1px solid $black;
     text-align: left;
 
     &:last-child {
       border-bottom: none;
-      color: $color-red;
+      color: $red;
     }
     &:hover {
-      background: $color-black;
-      color: $color-white;
+      background: $black;
+      color: $white;
     }
   }
 }

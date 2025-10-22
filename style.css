@@ -72,9 +72,7 @@ a {
   font-size: 18px;
   border-right: 4px solid red;
   cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .navbar__item:last-child {
   border-right: none;
@@ -128,9 +126,7 @@ a {
   position: relative;
   font-size: 15px;
   cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .dropdown__item:last-child {
   border-bottom: none;
@@ -167,9 +163,9 @@ a {
     position: static;
     left: auto;
     top: auto;
-    min-width: unset;
     width: 100%;
     max-width: 100%;
+    min-width: unset;
     border: 1px solid #333;
     background-color: #fff;
     overflow-y: auto;
@@ -177,9 +173,7 @@ a {
     flex-wrap: wrap;
   }
   .submenu .submenu__item {
-    flex: 0 0 50%;
     padding: 10px;
-    gap: 10px;
     font-size: 14px;
     border-bottom: 1px solid rgb(246.5, 246.5, 246.5);
   }
@@ -196,22 +190,35 @@ a {
     width: 100%;
     max-width: 100%;
     min-width: unset;
-    padding: 5px;
     border: 1px solid #333;
     background-color: #fff;
-    max-height: 60vh;
     overflow-y: auto;
+    max-height: 60vh;
     flex-wrap: wrap;
   }
   .submenu .submenu__item {
-    flex: 0 0 100%;
-    padding: 10px 16px;
+    padding: 10px;
     font-size: 14px;
     border-bottom: 1px solid rgb(246.5, 246.5, 246.5);
   }
   .submenu .submenu__item:hover {
     background-color: green;
     color: #fff;
+  }
+}
+@media (min-width: 577px) and (max-width: 768px) {
+  .submenu .submenu__item {
+    flex: 0 0 50%;
+    gap: 10px;
+  }
+}
+@media (max-width: 576px) {
+  .submenu {
+    padding: 5px;
+  }
+  .submenu .submenu__item {
+    flex: 0 0 100%;
+    padding: 10px 16px;
   }
 }
 
@@ -222,9 +229,7 @@ a {
   font-size: 14px;
   box-sizing: border-box;
   cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .submenu__item:hover {
   background-color: green;
@@ -321,8 +326,7 @@ a {
 .book-card__image {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .book-card__title {
   font-size: 14px;
@@ -394,11 +398,11 @@ a {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .nav-button:hover {
   background-color: #fff;
   color: green;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -7,7 +7,7 @@
   gap: 25px;
   padding: 30px;
 
-  @include tb-only {
+  @include mq("tb-min", between, "tb-max") {
     display: flex;
     overflow-x: auto;
     gap: 25px;
@@ -15,7 +15,7 @@
     scroll-behavior: smooth;
   }
 
-  @include sp-only {
+  @include mq("sp-max", max) {
     display: flex;
     overflow-x: auto;
     gap: 25px;
@@ -29,10 +29,11 @@
   flex-direction: column;
   cursor: pointer;
 
-  @include tb-only {
+  @include mq("tb-min", between, "tb-max") {
     flex: 0 0 calc((100% - 50px) / 3);
   }
-  @include sp-only {
+
+  @include mq("sp-max", max) {
     flex: 0 0 calc((100% - 25px) / 2);
   }
 
@@ -40,7 +41,7 @@
     width: 100%;
     aspect-ratio: 2 / 3;
     overflow: hidden;
-    border: 1px solid $color-gray-border;
+    border: 1px solid $gray-border;
     margin-bottom: 12px;
   }
 
@@ -53,7 +54,7 @@
   &__title {
     font-size: 14px;
     font-weight: normal;
-    color: $color-black;
+    color: $black;
     margin: 0 0 8px 0;
     line-height: 1.4;
     min-height: 40px;
@@ -62,7 +63,7 @@
   &__price {
     font-size: 15px;
     font-weight: bold;
-    color: $color-black;
+    color: $black;
   }
 
   &__status {
@@ -71,10 +72,11 @@
     display: inline-block;
 
     &--in-stock {
-      color: $color-orange;
+      color: $orange;
     }
+
     &--out {
-      color: $color-red;
+      color: $red;
     }
   }
 }
