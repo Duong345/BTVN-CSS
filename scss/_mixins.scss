@@ -13,7 +13,7 @@ $breakpoints: (
   @if map.has-key($breakpoints, $key) {
     @return map.get($breakpoints, $key);
   } @else {
-    @error " không tìm thấy";
+    @error "can't find breakpoint: #{$key}";
   }
 }
 
@@ -22,21 +22,29 @@ $breakpoints: (
     @media (min-width: get-bp($breakpoint)) {
       @content;
     }
-  } @else if $rule == max {
+  }
+
+  @if $rule == max {
     @media (max-width: get-bp($breakpoint)) {
       @content;
     }
-  } @else if $rule == between {
+  }
+
+  @if $rule == between {
     @if $breakpoint2 == null {
-      @error " tham số breakpoint2 cần có giá trị";
+      @error "breakpoint2 need a value";
     }
+
     @media (min-width: get-bp($breakpoint)) and (max-width: get-bp($breakpoint2)) {
       @content;
     }
-  } @else {
-    @error " không có rule như vậy";
+  }
+
+  @if ($rule != min) and ($rule != max) and ($rule != between) {
+    @error "Invalid rule";
   }
 }
+
 @mixin mq-multi($queries...) {
   @each $query in $queries {
     $bp: nth($query, 1);

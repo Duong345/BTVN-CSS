@@ -19,7 +19,7 @@
 .navbar__menu {
   display: flex;
 
-  @include mq("sp-max", max) {
+  @include mq("sp-max", "max") {
     display: block;
   }
 }
@@ -37,7 +37,7 @@
     border-right: none;
   }
 
-  @include mq("sp-max", max) {
+  @include mq("sp-max", "max") {
     border-right: none;
   }
 
@@ -77,7 +77,7 @@
   border: 1px solid $black;
   z-index: 1000;
 
-  @include mq("sp-max", max) {
+  @include mq("sp-max", "max") {
     min-width: 290px;
     top: 100%;
   }
@@ -127,7 +127,7 @@
   display: none;
   padding: 20px;
 
-  @include mq-multi(("tb-min", between, "tb-max"), ("sp-max", max)) {
+  @include mq-multi(("tb-min", between, "tb-max"), ("sp-max", "max")) {
     position: static;
     left: auto;
     top: auto;
@@ -159,7 +159,7 @@
     }
   }
 
-  @include mq("sp-max", max) {
+  @include mq("sp-max", "max") {
     padding: 5px;
 
     .submenu__item {
