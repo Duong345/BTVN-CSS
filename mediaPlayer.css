@@ -1,0 +1,155 @@
+body {
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
+.media-player {
+  position: relative;
+  width: 800px;
+  max-width: 100%;
+  background-color: #000;
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.video {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+  background: #000;
+}
+
+.controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: white;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+}
+
+.controls.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.media-player:hover .controls {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.controls button {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+  transition: transform 0.2s;
+}
+
+.controls button:hover {
+  transform: scale(1.2);
+}
+
+.icon {
+  pointer-events: none;
+}
+.seek-bar {
+  flex: 1;
+  height: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  accent-color: black;
+}
+
+.volume-bar {
+  width: 80px;
+  cursor: pointer;
+  accent-color: black;
+}
+
+.time-display {
+  color: black;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.upload-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.upload-container h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+input[type="file"] {
+  cursor: pointer;
+}
+.controls .btn {
+  position: relative;
+}
+
+.controls .btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.controls .btn::before {
+  content: "";
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease;
+  z-index: 5;
+}
+
+.controls .btn:hover::after,
+.controls .btn:hover::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-2px);
+}

@@ -1,49 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Media Player Plugin</title>
+    <link rel="stylesheet" href="mediaPlayer.css" />
   </head>
   <body>
-    <section class="container">
-      <div class="content">
-        <div class="display">0</div>
-        <div class="btn">
-          <button class="btn__ac">AC</button>
-          <button class="btn__sign">+/-</button>
-          <button class="btn__operator">%</button>
-          <button class="btn__operator">/</button>
-          <button class="btn__num">7</button>
-          <button class="btn__num">8</button>
-          <button class="btn__num">9</button>
-          <button class="btn__operator">*</button>
-          <button class="btn__num">4</button>
-          <button class="btn__num">5</button>
-          <button class="btn__num">6</button>
-          <button class="btn__operator">-</button>
-          <button class="btn__num">1</button>
-          <button class="btn__num">2</button>
-          <button class="btn__num">3</button>
-          <button class="btn__operator">+</button>
-          <button class="btn__his">⟳</button>
-          <button class="btn__num">0</button>
-          <button class="btn__point">.</button>
-          <button class="btn__result">=</button>
-        </div>
-        <div class="history-popup">
-          <h2>History</h2>
-          <div class="history-list"></div>
-          <div class="history-buttons">
-            <button class="btn-clear" style="color: red; font-weight: bold">
-              Clear
-            </button>
-            <button class="btn-close" style="font-weight: bold">Close</button>
-          </div>
-        </div>
-      </div>
-    </section>
-    <script src="main.js"></script>
+    <div class="upload-container">
+      <h2>Upload video input</h2>
+      <input type="file" id="videoInput" accept="video/*" />
+    </div>
+
+    <div id="playerContainer" class="media-player"></div>
+
+    <script src="mediaPlayer.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
