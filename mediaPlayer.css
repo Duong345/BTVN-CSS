@@ -1,5 +1,5 @@
 body {
-  background-color: #f0f0f0;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,20 +17,17 @@ body {
   overflow: hidden;
   font-family: Arial, sans-serif;
 }
-
 .video-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
 }
-
 .video {
   width: 100%;
   display: block;
   border-radius: 10px;
   background: #000;
 }
-
 .controls {
   position: absolute;
   bottom: 0;
@@ -45,19 +42,16 @@ body {
   opacity: 1;
   visibility: visible;
 }
-
 .controls.hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
-
 .media-player:hover .controls {
-  opacity: 1 !important;
-  visibility: visible !important;
-  pointer-events: auto !important;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
-
 .controls button {
   background: none;
   border: none;
@@ -67,11 +61,9 @@ body {
   padding: 5px;
   transition: transform 0.2s;
 }
-
 .controls button:hover {
   transform: scale(1.2);
 }
-
 .icon {
   pointer-events: none;
 }
@@ -82,37 +74,31 @@ body {
   cursor: pointer;
   accent-color: black;
 }
-
 .volume-bar {
   width: 80px;
   cursor: pointer;
   accent-color: black;
 }
-
 .time-display {
   color: black;
   font-size: 14px;
   white-space: nowrap;
 }
-
 .upload-container {
   margin-bottom: 20px;
   text-align: center;
 }
-
 .upload-container h2 {
   font-size: 20px;
   margin-bottom: 10px;
   color: #333;
 }
-
 input[type="file"] {
   cursor: pointer;
 }
 .controls .btn {
   position: relative;
 }
-
 .controls .btn::after {
   content: attr(data-tooltip);
   position: absolute;
@@ -131,7 +117,6 @@ input[type="file"] {
   pointer-events: none;
   z-index: 5;
 }
-
 .controls .btn::before {
   content: "";
   position: absolute;
@@ -146,7 +131,6 @@ input[type="file"] {
   transition: opacity 0.25s ease;
   z-index: 5;
 }
-
 .controls .btn:hover::after,
 .controls .btn:hover::before {
   opacity: 1;
