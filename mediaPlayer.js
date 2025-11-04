@@ -79,7 +79,7 @@ class MediaPlayer {
     this.volumeBar.addEventListener("input", () => {
       this.video.volume = this.volumeBar.value;
       this.muteBtn.textContent = this.video.volume == 0 ? "🔇" : "🔊";
-      this.muteBtn.setAttribute("data-tooltip", muted ? "Unmute" : "Mute"); // ✅ Tooltip động
+      this.muteBtn.setAttribute("data-tooltip", muted ? "Unmute" : "Mute"); 
     });
     this.muteBtn.addEventListener("click", () => {
       this.video.muted = !this.video.muted;
