@@ -1,0 +1,44 @@
+@use "../variables" as *;
+
+.user-avatar {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: 1px solid $red;
+  background: $sky;
+  cursor: pointer;
+  position: relative;
+}
+
+.navbar__user-avatar {
+  min-width: 180px;
+  display: none;
+  list-style: none;
+  position: absolute;
+  top: 70px;
+  left: -100px;
+
+  &.active {
+    display: block;
+    background: $white;
+    border: 1px solid $black;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  &--item {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid $black;
+    text-align: left;
+
+    &:last-child {
+      border-bottom: none;
+      color: $red;
+    }
+    &:hover {
+      background: $black;
+      color: $white;
+    }
+  }
+}

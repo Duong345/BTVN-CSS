@@ -1,0 +1,68 @@
+@use "./variables" as *;
+@use "sass:map";
+@use "sass:meta";
+
+$breakpoints: (
+  "sp-max": $sp-max,
+  "tb-min": $tb-min,
+  "tb-max": $tb-max,
+  "dt-min": $dt-min,
+);
+
+@function get-bp($key) {
+  @if map.has-key($breakpoints, $key) {
+    @return map.get($breakpoints, $key);
+  } @else {
+    @error "can't find breakpoint: #{$key}";
+  }
+}
+
+@mixin mq($breakpoint, $rule: min, $breakpoint2: null) {
+  @if $rule == min {
+    @media (min-width: get-bp($breakpoint)) {
+      @content;
+    }
+  }
+
+  @if $rule == max {
+    @media (max-width: get-bp($breakpoint)) {
+      @content;
+    }
+  }
+
+  @if $rule == between {
+    @if $breakpoint2 == null {
+      @error "breakpoint2 need a value";
+    }
+
+    @media (min-width: get-bp($breakpoint)) and (max-width: get-bp($breakpoint2)) {
+      @content;
+    }
+  }
+
+  @if ($rule != min) and ($rule != max) and ($rule != between) {
+    @error "Invalid rule";
+  }
+}
+
+@mixin mq-multi($queries...) {
+  @each $query in $queries {
+    $bp: nth($query, 1);
+    $rule: if(length($query) > 1, nth($query, 2), min);
+    $bp2: if(length($query) > 2, nth($query, 3), null);
+    @include mq($bp, $rule, $bp2) {
+      @content;
+    }
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin clickable {
+  cursor: pointer;
+  user-select: none;
+}

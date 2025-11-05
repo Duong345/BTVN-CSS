@@ -1,0 +1,15 @@
+@use "sass:color";
+
+$green: green;
+$red: red;
+$orange: orange;
+$black: #333;
+$white: #fff;
+$sky: #87ceeb;
+$gray-border: #ddd;
+$bg: #f5f5f5;
+$gray-light: color.adjust($gray-border, $lightness: 10%);
+$sp-max: 576px;
+$tb-min: 577px;
+$tb-max: 768px;
+$dt-min: 769px;
