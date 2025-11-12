@@ -4,9 +4,11 @@ class MediaPlayer {
     this.videoSrc = videoSrc;
     this.isPlaying = false;
     this.hideControlsTimeout = null;
+    this.previousVolume = 1;
     this.render();
     this.setupEvents();
   }
+
   render() {
     this.container.classList.add("media-player");
     this.container.innerHTML = `
@@ -35,6 +37,7 @@ class MediaPlayer {
     this.timeDisplay = this.container.querySelector(".time-display");
     this.controls = this.container.querySelector(".controls");
   }
+
   setupEvents() {
     this.playPauseBtn.addEventListener("click", () => {
       if (this.video.paused) {
@@ -43,12 +46,14 @@ class MediaPlayer {
         this.video.pause();
       }
     });
+
     this.video.addEventListener("play", () => {
       this.isPlaying = true;
       this.playPauseBtn.querySelector(".icon").textContent = "❚❚";
       this.playPauseBtn.setAttribute("data-tooltip", "Pause");
       this.hideControlsAfterDelay();
     });
+
     this.video.addEventListener("pause", () => {
       this.isPlaying = false;
       this.playPauseBtn.querySelector(".icon").textContent = "▶";
@@ -56,20 +61,25 @@ class MediaPlayer {
       this.controls.classList.remove("hidden");
       clearTimeout(this.hideControlsTimeout);
     });
+
     this.video.addEventListener("timeupdate", () => {
       this.seekBar.value = this.video.currentTime;
       this.updateTimeDisplay();
     });
+
     this.video.addEventListener("loadedmetadata", () => {
       this.seekBar.max = this.video.duration;
       this.updateTimeDisplay();
     });
+
     this.seekBar.addEventListener("input", () => {
       this.video.currentTime = this.seekBar.value;
     });
+
     this.backwardBtn.addEventListener("click", () => {
       this.video.currentTime = Math.max(0, this.video.currentTime - 10);
     });
+
     this.forwardBtn.addEventListener("click", () => {
       this.video.currentTime = Math.min(
         this.video.duration,
@@ -77,12 +87,33 @@ class MediaPlayer {
       );
     });
     this.volumeBar.addEventListener("input", () => {
-      this.video.volume = this.volumeBar.value;
-      this.muteBtn.textContent = this.video.volume == 0 ? "🔇" : "🔊";
-      this.muteBtn.setAttribute("data-tooltip", muted ? "Unmute" : "Mute"); 
+      const vol = parseFloat(this.volumeBar.value);
+      this.video.volume = vol;
+      if (vol === 0) {
+        this.video.muted = true;
+      } else {
+        this.video.muted = false;
+        this.previousVolume = vol;
+      }
+      this.muteBtn.textContent = this.video.muted ? "🔇" : "🔊";
+      this.muteBtn.setAttribute(
+        "data-tooltip",
+        this.video.muted ? "Unmute" : "Mute"
+      );
     });
     this.muteBtn.addEventListener("click", () => {
-      this.video.muted = !this.video.muted;
+      if (this.video.muted || this.video.volume === 0) {
+        const restore = this.previousVolume > 0 ? this.previousVolume : 1;
+        this.video.muted = false;
+        this.video.volume = restore;
+        this.volumeBar.value = restore;
+      } else {
+        this.previousVolume =
+          this.video.volume > 0 ? this.video.volume : this.previousVolume;
+        this.video.muted = true;
+        this.video.volume = 0;
+        this.volumeBar.value = "0";
+      }
       this.muteBtn.textContent = this.video.muted ? "🔇" : "🔊";
       this.muteBtn.setAttribute(
         "data-tooltip",
@@ -93,6 +124,14 @@ class MediaPlayer {
       if (this.isPlaying) {
         this.controls.classList.remove("hidden");
         this.hideControlsAfterDelay();
+      }
+    });
+    this.video.addEventListener("volumechange", () => {
+      const mutedNow = this.video.muted || this.video.volume === 0;
+      this.muteBtn.textContent = mutedNow ? "🔇" : "🔊";
+      this.muteBtn.setAttribute("data-tooltip", mutedNow ? "Unmute" : "Mute");
+      if (!mutedNow && this.video.volume > 0) {
+        this.previousVolume = this.video.volume;
       }
     });
   }
