@@ -51,7 +51,7 @@ body {
   transform: scale(1.05);
 }
 
-.placeholder {
+.item-placeholder {
   height: 40px;
   background: grey;
   border: 2px dashed green;

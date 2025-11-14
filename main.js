@@ -6,8 +6,8 @@ const body = document.querySelector("body");
 let draggedItem = null;
 let draggedContainer = null;
 
-let placeholder = document.createElement("div");
-placeholder.className = "placeholder";
+let itemPlaceholder = document.createElement("div");
+itemPlaceholder.className = "item-placeholder";
 
 let containerPlaceholder = document.createElement("div");
 containerPlaceholder.className = "container-placeholder";
@@ -90,15 +90,15 @@ contents.forEach((content) => {
 
     const afterElement = getDragAfterElement(content, e.clientY);
     if (afterElement == null) {
-      content.appendChild(placeholder);
+      content.appendChild(itemPlaceholder);
     } else {
-      content.insertBefore(placeholder, afterElement);
+      content.insertBefore(itemPlaceholder, afterElement);
     }
   });
 
   content.addEventListener("dragleave", (e) => {
     if (!content.contains(e.relatedTarget)) {
-      placeholder.remove();
+      itemPlaceholder.remove();
     }
   });
 
@@ -107,9 +107,9 @@ contents.forEach((content) => {
     e.stopPropagation();
     if (!draggedItem) return;
 
-    if (placeholder.parentNode) {
-      placeholder.parentNode.insertBefore(draggedItem, placeholder);
-      placeholder.remove();
+    if (itemPlaceholder.parentNode) {
+      itemPlaceholder.parentNode.insertBefore(draggedItem, itemPlaceholder);
+      itemPlaceholder.remove();
     }
   });
 });
