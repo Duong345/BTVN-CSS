@@ -15,7 +15,6 @@ class MediaPlayer {
 
       <div class="video-wrapper">
         <video class="video" src="${this.videoSrc}"></video>
-          <div class="status-toggle">Video is paused</div>
 
         <div class="controls">
           <button class="btn play-pause" data-tooltip="Play">
@@ -39,10 +38,16 @@ class MediaPlayer {
     this.volumeBar = this.container.querySelector(".volume-bar");
     this.timeDisplay = this.container.querySelector(".time-display");
     this.controls = this.container.querySelector(".controls");
-    this.statusToggle = this.container.querySelector(".status-toggle");
+    this.statusToggle = null;
+  }
+
+  locateStatusToggle() {
+    const parentToggle = window.parent.document.querySelector(".status-toggle");
+    this.statusToggle = parentToggle;
   }
 
   setupEvents() {
+    this.locateStatusToggle();
     this.playPauseBtn.addEventListener("click", () => {
       if (this.video.paused) {
         this.video.play();
@@ -56,8 +61,10 @@ class MediaPlayer {
       this.playPauseBtn.querySelector(".icon").textContent = "❚❚";
       this.playPauseBtn.setAttribute("data-tooltip", "Pause");
       this.hideControlsAfterDelay();
-      this.statusToggle.textContent = "Video is playing";
-      this.statusToggle.classList.add("active");
+      if (this.statusToggle) {
+        this.statusToggle.textContent = "Video is playing";
+        this.statusToggle.classList.add("active");
+      }
     });
 
     this.video.addEventListener("pause", () => {
@@ -66,8 +73,10 @@ class MediaPlayer {
       this.playPauseBtn.setAttribute("data-tooltip", "Play");
       this.controls.classList.remove("hidden");
       clearTimeout(this.hideControlsTimeout);
-      this.statusToggle.textContent = "Video is paused";
-      this.statusToggle.classList.remove("active");
+      if (this.statusToggle) {
+        this.statusToggle.textContent = "Video is paused";
+        this.statusToggle.classList.remove("active");
+      }
     });
 
     this.video.addEventListener("timeupdate", () => {
@@ -142,13 +151,13 @@ class MediaPlayer {
         this.previousVolume = this.video.volume;
       }
     });
-    this.statusToggle.addEventListener("click", () => {
-      if (this.video.paused) {
-        this.video.play();
-      } else {
-        this.video.pause();
-      }
-    });
+    if (this.statusToggle) {
+      this.boundToggleClick = () => {
+        if (this.video.paused) this.video.play();
+        else this.video.pause();
+      };
+      this.statusToggle.addEventListener("click", this.boundToggleClick);
+    }
   }
   updateTimeDisplay() {
     const current = this.formatTime(this.video.currentTime);

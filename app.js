@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!file) return;
 
     const videoURL = URL.createObjectURL(file);
+    try {
+      const statusToggle = document.querySelector(".status-toggle");
+      if (statusToggle) statusToggle.style.display = "block";
+    } catch (e) {}
     const postMessageToIframe = () => {
       iframe.contentWindow.postMessage(
         { type: "LOAD_VIDEO", url: videoURL },
