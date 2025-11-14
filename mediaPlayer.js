@@ -12,8 +12,11 @@ class MediaPlayer {
   render() {
     this.container.classList.add("media-player");
     this.container.innerHTML = `
+
       <div class="video-wrapper">
         <video class="video" src="${this.videoSrc}"></video>
+          <div class="status-toggle">Video is paused</div>
+
         <div class="controls">
           <button class="btn play-pause" data-tooltip="Play">
             <span class="icon">▶</span>
@@ -36,6 +39,7 @@ class MediaPlayer {
     this.volumeBar = this.container.querySelector(".volume-bar");
     this.timeDisplay = this.container.querySelector(".time-display");
     this.controls = this.container.querySelector(".controls");
+    this.statusToggle = this.container.querySelector(".status-toggle");
   }
 
   setupEvents() {
@@ -52,6 +56,8 @@ class MediaPlayer {
       this.playPauseBtn.querySelector(".icon").textContent = "❚❚";
       this.playPauseBtn.setAttribute("data-tooltip", "Pause");
       this.hideControlsAfterDelay();
+      this.statusToggle.textContent = "Video is playing";
+      this.statusToggle.classList.add("active");
     });
 
     this.video.addEventListener("pause", () => {
@@ -60,6 +66,8 @@ class MediaPlayer {
       this.playPauseBtn.setAttribute("data-tooltip", "Play");
       this.controls.classList.remove("hidden");
       clearTimeout(this.hideControlsTimeout);
+      this.statusToggle.textContent = "Video is paused";
+      this.statusToggle.classList.remove("active");
     });
 
     this.video.addEventListener("timeupdate", () => {
@@ -132,6 +140,13 @@ class MediaPlayer {
       this.muteBtn.setAttribute("data-tooltip", mutedNow ? "Unmute" : "Mute");
       if (!mutedNow && this.video.volume > 0) {
         this.previousVolume = this.video.volume;
+      }
+    });
+    this.statusToggle.addEventListener("click", () => {
+      if (this.video.paused) {
+        this.video.play();
+      } else {
+        this.video.pause();
       }
     });
   }

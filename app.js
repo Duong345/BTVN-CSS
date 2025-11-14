@@ -1,54 +1,77 @@
 document.addEventListener("DOMContentLoaded", () => {
   const iframe = document.getElementById("playerFrame");
-  const tpl = document.getElementById("playerDoc");
-  iframe.srcdoc = tpl.innerHTML.trim();
-  let frameReady = false;
-  iframe.addEventListener("load", () => {
-    frameReady = true;
-  });
-  const input = document.getElementById("videoInput");
+  const template = document.getElementById("playerDoc");
+  const videoInput = document.getElementById("videoInput");
   const dropzone = document.getElementById("dropzone");
   const chooseBtn = document.getElementById("chooseBtn");
   const iconBtn = dropzone.querySelector(".dz-icon");
-  const sendToPlayer = (file) => {
+
+  iframe.srcdoc = template.innerHTML.trim();
+  let isFrameReady = false;
+
+  iframe.addEventListener("load", () => {
+    isFrameReady = true;
+  });
+
+  const sendVideoToPlayer = (file) => {
     if (!file) return;
+
     const videoURL = URL.createObjectURL(file);
-    const send = () => {
+    const postMessageToIframe = () => {
       iframe.contentWindow.postMessage(
         { type: "LOAD_VIDEO", url: videoURL },
         "*"
       );
     };
-    if (frameReady) send();
-    else iframe.addEventListener("load", send, { once: true });
+
+    if (isFrameReady) {
+      postMessageToIframe();
+    } else {
+      iframe.addEventListener("load", postMessageToIframe, { once: true });
+    }
   };
-  iconBtn.addEventListener("click", () => input.click());
-  chooseBtn.addEventListener("click", () => input.click());
-  input.addEventListener("change", (e) => {
-    const file = e.target.files && e.target.files[0];
-    if (file) sendToPlayer(file);
-    input.value = "";
-  });
-  const setDragOver = (on) => {
-    dropzone.classList.toggle("dragover", !!on);
+
+  const handleFileInputChange = (event) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      sendVideoToPlayer(file);
+      videoInput.value = "";
+    }
   };
-  ["dragenter", "dragover", "dragleave", "drop"].forEach((evt) => {
-    dropzone.addEventListener(evt, (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-    });
-  });
-  dropzone.addEventListener("dragenter", () => setDragOver(true));
-  dropzone.addEventListener("dragover", () => setDragOver(true));
-  dropzone.addEventListener("dragleave", () => setDragOver(false));
-  dropzone.addEventListener("drop", (e) => {
-    setDragOver(false);
-    const dt = e.dataTransfer;
-    if (!dt || !dt.files || !dt.files.length) return;
-    const file = dt.files[0];
+
+  const toggleDragOverState = (isDragOver) => {
+    dropzone.classList.toggle("dragover", isDragOver);
+  };
+
+  const preventDefaults = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
+  const handleDrop = (event) => {
+    toggleDragOverState(false);
+
+    const files = event.dataTransfer?.files;
+    if (!files || files.length === 0) return;
+
+    const file = files[0];
     if (file.type && !file.type.startsWith("video/")) {
       return;
     }
-    sendToPlayer(file);
+
+    sendVideoToPlayer(file);
+  };
+
+  iconBtn.addEventListener("click", () => videoInput.click());
+  chooseBtn.addEventListener("click", () => videoInput.click());
+  videoInput.addEventListener("change", handleFileInputChange);
+
+  ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+    dropzone.addEventListener(eventName, preventDefaults);
   });
+
+  dropzone.addEventListener("dragenter", () => toggleDragOverState(true));
+  dropzone.addEventListener("dragover", () => toggleDragOverState(true));
+  dropzone.addEventListener("dragleave", () => toggleDragOverState(false));
+  dropzone.addEventListener("drop", handleDrop);
 });
