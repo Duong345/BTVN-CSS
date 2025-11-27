@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const undoBtn = document.getElementById("undoBtn");
   const redoBtnEl = document.getElementById("redoBtn");
   const exportBtn = document.getElementById("exportBtn");
-
   const todoCol = document.getElementById("todo");
   const inprogressCol = document.getElementById("inprogress");
   const doneCol = document.getElementById("done");
@@ -21,27 +20,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const HISTORY_KEY = "task_history_v1";
   const REDO_KEY = "task_redo_v1";
 
-  [undoBtn, redoBtnEl, exportBtn].forEach((btn) => {
-    if (btn) btn.disabled = true;
-  });
-
   function saveStacks() {
     localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
     localStorage.setItem(REDO_KEY, JSON.stringify(redoStack));
   }
 
   function loadStacks() {
-    const h = localStorage.getItem(HISTORY_KEY);
-    const r = localStorage.getItem(REDO_KEY);
-    if (h) history = JSON.parse(h);
-    if (r) redoStack = JSON.parse(r);
+    const historyJson = localStorage.getItem(HISTORY_KEY);
+    const redoJson = localStorage.getItem(REDO_KEY);
+    history = JSON.parse(historyJson);
+    redoStack = JSON.parse(redoJson);
   }
 
   loadStacks();
 
   function setSyncing(on) {
-    pendingRequests += on ? 1 : -1;
-    pendingRequests = Math.max(0, pendingRequests);
+    if (on) {
+      pendingRequests++;
+    } else {
+      pendingRequests = Math.max(0, pendingRequests - 1);
+    }
 
     if (pendingRequests > 0) {
       syncEl.classList.add("syncing");
@@ -206,24 +204,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateActionButtons() {
     const hasTasks = Array.isArray(currentTasks) && currentTasks.length > 0;
+    const hasUndo = history.length > 0;
+    const hasRedo = redoStack.length > 0;
 
-    [undoBtn, exportBtn].forEach((btn) => {
-      if (btn) {
-        btn.classList.toggle("active", hasTasks);
-        btn.disabled = !hasTasks;
-      }
-    });
+    undoBtn.classList.toggle("active", hasUndo);
+    undoBtn.disabled = !hasUndo;
+
+    exportBtn.classList.toggle("active", hasTasks);
+    exportBtn.disabled = !hasTasks;
 
     if (redoBtnEl) {
-      const hasRedo = redoStack.length > 0;
       redoBtnEl.classList.toggle("active", hasRedo);
       redoBtnEl.disabled = !hasRedo;
     }
   }
 
   async function undoLast() {
-    if (!history.length) return alert("Không có thao tác nào để hoàn tác");
-
     const action = history.pop();
     isUndoing = true;
 
@@ -313,7 +309,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const line = keys
         .map((k) => {
           const v = t[k] == null ? "" : String(t[k]);
-          return `"${v.replace(/"/g, '""')}"`;
+          return `"${v.replace(/"/g, "")}"`;
         })
         .join(",");
       rows.push(line);
@@ -326,10 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const a = document.createElement("a");
     a.href = url;
-    a.download = `tasks-${new Date()
-      .toISOString()
-      .slice(0, 19)
-      .replace(/[:T]/g, "-")}.csv`;
+    a.download = `tasks-${Date.now()}.csv`;
     document.body.appendChild(a);
     a.click();
     a.remove();
