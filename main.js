@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const created = await res.json();
     history.push({ type: "create", item: created });
     saveStacks();
-    await fetchTasks();
+    renderTask(created);
   }
 
   async function deleteTask(id) {
@@ -151,12 +151,19 @@ document.addEventListener("DOMContentLoaded", () => {
     history.push({ type: "delete", item });
     redoStack = [];
     saveStacks();
-    await fetchTasks();
+    const el = document.querySelector(`[data-id='${id}']`);
+    el.remove();
+    updateActionButtons();
   }
 
-  async function updateTask(id, updates, skipHistory = false) {
+  async function updateTask(
+    id,
+    updates,
+    skipHistory = false,
+    skipFetch = false
+  ) {
     let before = null;
-    if (!skipHistory) {
+    if (!skipHistory && !skipFetch) {
       const beforeRes = await apiFetch(`${API_URL}/${id}`);
       if (beforeRes.ok) before = await beforeRes.json();
     }
@@ -173,7 +180,24 @@ document.addEventListener("DOMContentLoaded", () => {
       redoStack = [];
       saveStacks();
     }
-    await fetchTasks();
+    updateTaskUI(id, updates);
+  }
+
+  function renderTask(task) {
+    const card = createCard(task);
+    const col =
+      task.status === "done"
+        ? doneCol
+        : task.status === "inprogress"
+        ? inprogressCol
+        : todoCol;
+    col.appendChild(card);
+  }
+
+  function updateTaskUI(id, updates) {
+    const old = document.querySelector(`[data-id='${id}']`);
+    const newCard = createCard(updates);
+    old.parentElement.replaceChild(newCard, old);
   }
 
   function editTask(item) {
@@ -185,7 +209,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   addBtn.addEventListener("click", () => {
     const val = input.value.trim();
-    if (!val) return;
     createTask(val);
     input.value = "";
     input.focus();
@@ -265,28 +288,42 @@ document.addEventListener("DOMContentLoaded", () => {
     const action = redoStack.pop();
 
     try {
-      if (action.type === "create") {
-        const payload = { ...action.item };
-        delete payload.id;
-        const res = await apiFetch(API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        if (res.ok) {
-          const created = await res.json();
-          history.push({ type: "create", item: created });
+      switch (action.type) {
+        case "create": {
+          const payload = { ...action.item };
+          delete payload.id;
+
+          const res = await apiFetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          if (res.ok) {
+            const created = await res.json();
+            history.push({ type: "create", item: created });
+          }
+          break;
         }
-      } else if (action.type === "delete") {
-        await apiFetch(`${API_URL}/${action.item.id}`, { method: "DELETE" });
-        history.push({ type: "delete", item: action.item });
-      } else if (action.type === "update") {
-        await updateTask(action.before.id, action.after, true);
-        history.push({
-          type: "update",
-          before: action.before,
-          after: action.after,
-        });
+
+        case "delete": {
+          await apiFetch(`${API_URL}/${action.item.id}`, { method: "DELETE" });
+          history.push({ type: "delete", item: action.item });
+          break;
+        }
+
+        case "update": {
+          await updateTask(action.before.id, action.after, true);
+          history.push({
+            type: "update",
+            before: action.before,
+            after: action.after,
+          });
+          break;
+        }
+
+        default:
+          break;
       }
     } catch (err) {
       console.error(err);
