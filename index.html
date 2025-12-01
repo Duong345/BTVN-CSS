@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">Task Manager</div>
+      <div class="sync">Synced ✓</div>
+    </header>
+
+    <main class="container">
+      <section class="input-row">
+        <div class="input-controls">
+          <input
+            id="taskInput"
+            class="task-input"
+            placeholder="Add a new task..."
+          />
+          <button id="addBtn" class="btn primary">Add</button>
+        </div>
+
+        <div class="action-buttons">
+          <button id="undoBtn" class="btn ghost" disabled="true">Undo</button>
+          <button id="redoBtn" class="btn ghost muted" disabled="true">
+            Redo
+          </button>
+          <button id="exportBtn" class="btn ghost" disabled="true">
+            Export
+          </button>
+        </div>
+      </section>
+
+      <section class="boards">
+        <div class="board">
+          <h3>To Do</h3>
+          <div id="todo" class="board-column"></div>
+        </div>
+
+        <div class="board">
+          <h3>In Progress</h3>
+          <div id="inprogress" class="board-column"></div>
+        </div>
+
+        <div class="board">
+          <h3>Done</h3>
+          <div id="done" class="board-column"></div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
