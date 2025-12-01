@@ -57,9 +57,27 @@ async function sendMessage() {
     minute: "2-digit",
   });
 
+  function markdownToHTML(text) {
+    text = text.replace(/^### (.*$)/gim, "<h3>$1</h3>");
+    text = text.replace(/^## (.*$)/gim, "<h2>$1</h2>");
+    text = text.replace(/^# (.*$)/gim, "<h1>$1</h1>");
+
+    text = text.replace(/\*\*(.*?)\*\*/gim, "<b>$1</b>");
+    text = text.replace(/\*(.*?)\*/gim, "<i>$1</i>");
+
+    text = text.replace(/^\s*[-*] (.*)$/gim, "<li>$1</li>");
+    text = text.replace(/(<li>[\s\S]*?<\/li>)+/gim, "<ul>$&</ul>");
+
+    text = text.replace(/\n/gim, "<br>");
+
+    return text.trim();
+  }
+
+  const htmlReply = markdownToHTML(reply);
+
   chatArea.innerHTML += `
       <div class="message bot">
-        <div class="message-content">${reply}</div>
+        <div class="message-content">${htmlReply}</div>
         <div class="timestamp">${botTime}</div>
       </div>
     `;
